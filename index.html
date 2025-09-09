@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELLO WORLD - Newspaper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .logo h1 {
+            font-size: 48px;
+            font-weight: normal;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        .nav {
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            padding: 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav li {
+            margin: 0 30px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 15px 0;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .nav a:hover {
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .content {
+            flex: 2;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        /* Featured Articles */
+        .featured-articles {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .article-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .article-card h3 {
+            font-size: 12px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Main Article */
+        .main-article {
+            margin-bottom: 30px;
+        }
+
+        .main-article img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .main-article h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .author-info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .article-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Recent Posts */
+        .recent-posts {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: "~~~";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .section-title::before {
+            left: 0;
+        }
+
+        .section-title::after {
+            right: 0;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .post-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-item img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .post-content h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Sidebar */
+        .sidebar-section {
+            margin-bottom: 30px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .sidebar-title {
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-content {
+            padding: 15px;
+        }
+
+        .popular-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .popular-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .popular-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #666;
+            min-width: 20px;
+        }
+
+        .popular-item img {
+            width: 60px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        .popular-content h4 {
+            font-size: 12px;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            font-size: 12px;
+        }
+
+        .search-box button {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .trending-item {
+            margin-bottom: 15px;
+        }
+
+        .trending-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .trending-item h4 {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 3px 8px;
+            font-size: 10px;
+            text-decoration: none;
+            color: #666;
+            border-radius: 2px;
+        }
+
+        .tag:hover {
+            background: #ddd;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .featured-articles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav ul {
+                flex-wrap: wrap;
+            }
+            
+            .nav li {
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="top-bar">
+                <div>☰ MORE</div>
+                <div>📅 Friday, 5 January 2025</div>
+                <div>🔍 SEARCH</div>
+            </div>
+            
+            <div class="logo">
+                <h1>HELLO WORLD</h1>
+                <p>~~~ NEWSPAPER | MAGAZINE | PUBLISHER ~~~</p>
+            </div>
+            
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">LAYOUT</a></li>
+                    <li><a href="#">NEWS</a></li>
+                    <li><a href="#">ECONOMY</a></li>
+                    <li><a href="#">ENTERTAINMENT</a></li>
+                    <li><a href="#">JOBS</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Featured Articles -->
+        <div class="featured-articles" style="padding: 20px 20px 0;">
+            <div class="article-card">
+                <img src="/placeholder.svg?height=80&width=150" alt="Article">
+                <h3>Lorem ipsum dui sollicitudin</h3>
+                <div class="article-meta">5 JAN 2025 • 10 VIEWS</div>
+            </div>
+            <div class="article-card">
+                <img src="/placeholder.svg?height=80&width=150" alt="Article">
+                <h3>Ut enim ad minim veniam</h3>
+                <div class="article-meta">5 JAN 2025 • 15 VIEWS</div>
+            </div>
+            <div class="article-card">
+                <img src="/placeholder.svg?height=80&width=150" alt="Article">
+                <h3>Quis nostrud exercitation ullamco</h3>
+                <div class="article-meta">4 JAN 2025 • 8 VIEWS</div>
+            </div>
+            <div class="article-card">
+                <img src="/placeholder.svg?height=80&width=150" alt="Article">
+                <h3>At vero eos et accusamus et iusto</h3>
+                <div class="article-meta">3 JAN 2025 • 12 VIEWS</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <main class="content">
+                <!-- Main Article -->
+                <article class="main-article">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Fashion Man">
+                    <h2>Lorem ipsum dui sollicitudin praesentut mollis primis eros torquent fames</h2>
+                    <div class="article-author">
+                        <img src="/placeholder.svg?height=40&width=40" alt="Author" class="author-avatar">
+                        <div class="author-info">
+                            <div>Steven Job</div>
+                            <div>5 JAN 2025</div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </article>
+
+                <!-- Recent Posts -->
+                <section class="recent-posts">
+                    <h2 class="section-title">RECENT POSTS</h2>
+                    <div class="posts-grid">
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>Magna aliqua ut enim ad minim veniam</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>Letraset sheets containing Lorem Ipsum passages, and more recently</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>It uses a dictionary of over 200 Latin words, combined</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>Reading is not only informed by what's going on with us at that moment</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <img src="/placeholder.svg?height=80&width=100" alt="Post">
+                            <div class="post-content">
+                                <h3>What you see and what you're experiencing as you read these</h3>
+                                <div class="post-meta">STEVEN JOB • POLITICS NEWS • 18 SEP 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Popular Articles -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">● POPULAR ARTICLES</div>
+                    <div class="sidebar-content">
+                        <div class="popular-item">
+                            <div class="popular-number">1.</div>
+                            <img src="/placeholder.svg?height=50&width=60" alt="Popular">
+                            <div class="popular-content">
+                                <h4>Ut enim ad minim veniam, quis nostrud</h4>
+                                <div class="post-meta">5 JAN 2025 • 234 VIEWS</div>
+                            </div>
+                        </div>
+                        <div class="popular-item">
+                            <div class="popular-number">2.</div>
+                            <img src="/placeholder.svg?height=50&width=60" alt="Popular">
+                            <div class="popular-content">
+                                <h4>Curabitur blandit cursus risus verius</h4>
+                                <div class="post-meta">4 JAN 2025 • 189 VIEWS</div>
+                            </div>
+                        </div>
+                        <div class="popular-item">
+                            <div class="popular-number">3.</div>
+                            <img src="/placeholder.svg?height=50&width=60" alt="Popular">
+                            <div class="popular-content">
+                                <h4>Pellentesque lorem velit ante augue</h4>
+                                <div class="post-meta">3 JAN 2025 • 156 VIEWS</div>
+                            </div>
+                        </div>
+                        <div class="popular-item">
+                            <div class="popular-number">4.</div>
+                            <img src="/placeholder.svg?height=50&width=60" alt="Popular">
+                            <div class="popular-content">
+                                <h4>Quisque mauris lorem erat sit euismod</h4>
+                                <div class="post-meta">2 JAN 2025 • 134 VIEWS</div>
+                            </div>
+                        </div>
+                        <div class="popular-item">
+                            <div class="popular-number">5.</div>
+                            <img src="/placeholder.svg?height=50&width=60" alt="Popular">
+                            <div class="popular-content">
+                                <h4>Nec eget lorem purus semper gravida</h4>
+                                <div class="post-meta">1 JAN 2025 • 98 VIEWS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">● SEARCH</div>
+                    <div class="sidebar-content">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search...">
+                            <button>SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">● TRENDING</div>
+                    <div class="sidebar-content">
+                        <div class="trending-item">
+                            <img src="/placeholder.svg?height=120&width=200" alt="Trending">
+                            <div style="background: #333; color: white; padding: 5px; font-size: 10px; margin-top: -25px; position: relative; z-index: 1;">Local Blog</div>
+                            <h4>Nos agnus is there anyone who loves or pursues or desires to obtain</h4>
+                        </div>
+                        <div style="font-size: 12px; margin-bottom: 15px;">
+                            <h4>Magna aliqua ut enim ad minim veniam</h4>
+                            <div class="post-meta">5 JAN 2025</div>
+                        </div>
+                        <div style="font-size: 12px; margin-bottom: 15px;">
+                            <h4>Magna aliqua ut enim ad minim veniam</h4>
+                            <div class="post-meta">4 JAN 2025</div>
+                        </div>
+                        <div style="font-size: 12px;">
+                            <h4>Magna aliqua ut enim ad minim veniam</h4>
+                            <div class="post-meta">3 JAN 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags Cloud -->
+                <div class="sidebar-section">
+                    <div class="sidebar-title">● TAGS CLOUD</div>
+                    <div class="sidebar-content">
+                        <div class="tags">
+                            <a href="#" class="tag">Business</a>
+                            <a href="#" class="tag">Technology</a>
+                            <a href="#" class="tag">Sport</a>
+                            <a href="#" class="tag">Art</a>
+                            <a href="#" class="tag">Lifestyle</a>
+                            <a href="#" class="tag">Three</a>
+                            <a href="#" class="tag">Photography</a>
+                            <a href="#" class="tag">Education</a>
+                            <a href="#" class="tag">Social</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MOST COMMENTS</h3>
+                    <ul>
+                        <li><a href="#">Tristique adipiscing mollis orci</a></li>
+                        <li><a href="#">Aliquam sed lorem vitae a sed</a></li>
+                        <li><a href="#">Duis sit alias cras consectetur</a></li>
+                        <li><a href="#">Aenl for leo much hello and beatiful</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>LATEST</h3>
+                    <ul>
+                        <li><a href="#">Magna aliqua ut enim ad minim veniam quis</a></li>
+                        <li><a href="#">Magna aliqua ut enim ad minim veniam quis</a></li>
+                        <li><a href="#">Magna aliqua ut enim ad minim veniam quis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>CATEGORIES</h3>
+                    <ul>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Environment</a></li>
+                        <li><a href="#">Life style</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Politics</a></li>
+                        <li><a href="#">World</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>INSTAGRAM</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                        <img src="/placeholder.svg?height=50&width=50" alt="Instagram" style="width: 100%; height: 50px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <h2>HELLO WORLD</h2>
+                <p>~~~ ◊ ◊ ◊ ◊ ◊ ~~~</p>
+                <p>© Copyright 2025. All rights reserved. Design by Allthemes.com</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
